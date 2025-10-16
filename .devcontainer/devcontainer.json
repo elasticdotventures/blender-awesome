@@ -1,0 +1,67 @@
+{
+  "name": "Blender Awesome - Generative CAD & Robotics",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "blender-dev",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "dev",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.pylint",
+        "ms-python.black-formatter",
+        "ms-vscode.cpptools",
+        "ms-toolsai.jupyter",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.formatting.provider": "black"
+      }
+    }
+  },
+  
+  "forwardPorts": [
+    8888,
+    9876,
+    8080,
+    3000
+  ],
+  
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "bash .devcontainer/start-services.sh",
+  
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "type=volume,source=blender-cache,target=/home/dev/.cache",
+    "type=volume,source=blender-config,target=/home/dev/.config"
+  ],
+  
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "BLENDER_HOST": "localhost",
+    "BLENDER_PORT": "9876",
+    "PYTHONPATH": "/workspace:/opt/blender/python/lib/python3.11/site-packages"
+  }
+}

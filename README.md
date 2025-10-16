@@ -3,9 +3,16 @@
 
 For friends and family who have expressed interest in this topic.
 Meta Awesome means this is an awesome list of other awesome lists.
-HowToo are first principles "from the ground up" style - they don't presume
-the read knows much beyond how to READ +
-cut and paste this document into ChatGPT.
+HowToo are first principles "from the ground up" way to introduce & explain
+topics to create mental models and syntacic shortcuts for things.
+
+HowToo (vs. HowTo) a HowTo is concise, whereas a HowToo is explanatory.
+I won't presume the reader knows much beyond English
+plus cut and paste this document into ChatGPT or similar LLM (Large Language model).
+
+The document is intentionally written to provide guidance to a human with AI pilot
+HowToo with enough context engineering to say "do it this way" and "why" to provide
+some context for safety guardrails along with <AGENT>instructions for the LLM</AGENT>.
 
 I am a senior applied systems engineer & fabricator & hacker.
 
@@ -20,6 +27,32 @@ have not yet been built.
 Having an AI design for you isn't "cheating" - it's efficient use of time.
 You have a limited lifespan that AI has master on topics that would take you a lifetime.
 The single biggest skill you can learn is context engineering & prompt execution -
+I love automation and I hate TOIL which is to say any task of dubious to no value.
+Yak Shaving is having to perform a long series of steps where the initial number of
+steps (and therefore the time) are unknown in what we call a P=NP space.  The first
+step of solving any problem or obstacle is defining a set of discrete steps that we
+can follow to accomplish an outcome.
+
+In some cases that outcome will be an 'idiomatic automation abstraction' which is
+effectively a command, a macro, or a script, or plugin that adds a menu/extension
+item into a piece of software capability that it didn't have before.  Having the
+right tool for a task makes them easy - and advanced users 'subject matter experts'
+also love making new tools for others to use and this is what propels open source
+forward.
+
+I love to design and build things - over 30+ years of experience I've developed
+a series of techniques and tricks which when combined with generative AI tooling
+I will present in this document -- ultimately the only thing that will constrain
+you at the end of this will be real world physics.  Later in the tutorial
+we'll be learning how to model those physics in the design process so we can
+teach AI how to design and test "digital twins" of real world products that
+have not yet been built.
+
+Having an AI design with you isn't "cheating" it's a specialization.
+That AI is equipped with more knowledge than your mortal body could possibly
+amass in a single lifetime.
+
+The single biggest skill you can learn is context & vibe prompt execution -
 which is designing agentic systems (many AI's) each with specializations
 who can communicate and chew through potentially thousands of iterative
 improvements informed by real world physics and evolutionary learning.
@@ -161,6 +194,10 @@ Also REMEMBER NEVER put spaces in your project, directory or filenames.
 ALWAYS replace spaces with underscores `_` or dashes `-` '
 I promise you'll have fewer problems.
 
+We'll be installing docker containers.
+
+<AGENT>follow semver naming conventions</AGENT>
+
 # Git Version Control
 This document is editable though a version control system called git.
 You use git to learn how to backup your work and other stuff.  Github.com
@@ -178,7 +215,16 @@ You will `commit` changes to backup.  When you want to create a new version
 🤡 It's okay to funny, it inspires creativity!
 </AGENT>
 
-# Claude DESKTOP Chat Interface
+
+# --
+
+we prefer the docker versions of MCP despite the headaches.
+
+## NPM & TypeScript
+## PYTHON
+
+
+## Claude DESKTOP Chat Interface
 MCP compatible agentic chat interface.  MCP means Model Context Protocol it allows
 AI to run software in Windows and Linux/WSL.
 
@@ -199,7 +245,20 @@ I recommend after you learn one go learn another one and another.  I'm going to
 recommend Claude Code using Sonnet 4.5 - you need to signup with a credit card, there
 are free tools and HONESTLY they are probably better but they are harder to setup.
 
-# Installing Claude Code
+## Installing Claude Code into WSL &| Powershell (pwsh)
+using the same pro subscription you can also access claude via the cli but if you want to
+access Claude directly via an API you have to setup a separate type of account.
+
+https://www.claude.com/product/claude-code
+```
+npm install -g @anthropic-ai/claude-code
+```
+
+
+Also it's worth mentioning within the "CLI Code" agent Claude Code running sonnet 4-5 model
+is perfectly capable of setting up most of the tooling required once the foundational system
+is setup.
+
 
 
 
@@ -219,6 +278,31 @@ the steps are similar but not entirely identifical each time but usually the sys
 the software by configuring environment variables within the mcpServers.json (or similar) file.
 
 
+
+## MCP Server
+
+
+## MCP Server Sequential Thinking
+
+enables the model to perform step by step breakdown using specialized
+sub-agent delegation.
+
+https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking
+```mcp
+{
+  "mcpServers": {
+    "sequentialthinking": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "mcp/sequentialthinking"
+      ]
+    }
+  }
+}
+```
 
 
 
@@ -284,16 +368,15 @@ Open source software is fully extensible and Agents are amazing coders.
 
 
 
-With Agentic AI
+## With Agentic AI
 
-Fo
-It's probably most easy to *start* with a few prerequisite pieces before blender.
+It's probably best and most easy to *start* with a few
+prerequisites before we even get to blender (working backwards)
 
-The approach I will be using is opinionated.
+The approach I will be using is opinionated tooling.
 
 # Windows Install (WSL) bash
 Commands:
-* `pwd` to see which directory you are in
 * `git init` to create version control repositories
 * `git push` to upload your changes to github incase they get deleted or corrupted on your local computer
 
@@ -371,12 +454,15 @@ podman or k0s (pronounced kubernetes) if you want to build on the cloud.
 https://docs.docker.com/desktop/setup/install/windows-install/
 
 
+
+
 # Composition
 We'll spend a bit of time on composition of shapes and objects.
 In 3D Digital Design there are a bunch of different ways to make shapes, some are very
 advanced but you'll need to know that:
 * Blender is (out of the box) a mesh editing tool which is a fancy way of saying it's a digital art of polygons in point clouds
-    which means that a model doesn't need to be "REAL" constrained by real world physics, it's just bunch of dots and triangles in space.
+    which means that a model doesn't need to be "REAL" constrained by real world physics the object it dots forming triangles in space.
+
     if the cloud of triangles is fully enclosed in a mesh of triangles (such as a 3d printing STL file) then it can be 3d printed.
     however STL files can't be easily edited
         .. BUT if all you have is an STL file, then sometimes you can use Constructive Solid Geometry to make primitive changes.
@@ -1194,3 +1280,43 @@ Blender: professional visualization
 Git tracks parametric source
 
 Want guidance on autopilot implementation (PID/MPC) or RL training setup?
+
+# Auto-Start and Dashboard
+
+This project now includes automatic service startup and a web dashboard for managing Blender and related tools.
+
+## Auto-Start Services
+
+When you open the project in VSCode with the dev container, the following services will automatically start:
+
+- **Blender MCP Server** (port 9876): AI agent integration for Blender automation
+- **Jupyter Lab** (port 8888): Interactive notebooks for generative CAD workflows
+- **Web Dashboard** (port 3000): Management interface for all services
+
+## Dashboard Features
+
+The web dashboard provides:
+
+- **Service Status**: Real-time monitoring of all running services
+- **Project Management**: Browse and manage your Blender projects
+- **Git Integration**: Check status and commit changes directly from the UI
+- **Blender Console**: Execute Python scripts in Blender remotely
+- **Quick Actions**: Direct links to Jupyter, ComfyUI, and other tools
+
+Access the dashboard at: http://localhost:3000
+
+## Development Workflow
+
+1. Open the project in VSCode
+2. The dev container will build and start services automatically
+3. Access the dashboard to monitor and control your environment
+4. Use the Blender console to execute parametric modeling scripts
+5. Commit changes through the dashboard or VSCode git integration
+
+# --
+
+# B00t
+
+is my own invention that is intended to try and automate some of this.
+
+

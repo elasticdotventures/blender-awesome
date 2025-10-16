@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  blender-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/workspace:cached
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - blender-cache:/home/dev/.cache
+      - blender-config:/home/dev/.config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DISPLAY=${DISPLAY}
+      - BLENDER_HOST=localhost
+      - BLENDER_PORT=9876
+      - PYTHONPATH=/workspace:/opt/blender/python/lib/python3.11/site-packages
+    ports:
+      - "8888:8888"    # Jupyter
+      - "9876:9876"    # Blender MCP
+      - "8080:8080"    # ComfyUI
+      - "3000:3000"    # Dashboard
+    working_dir: /workspace
+    user: dev
+    stdin_open: true
+    tty: true
+    privileged: true  # For Docker-in-Docker
+    command: sleep infinity
+
+  # Optional: ComfyUI service for AI generation
+  comfyui:
+    image: mcp/comfyui
+    ports:
+      - "8081:8080"
+    volumes:
+      - comfyui-models:/app/models
+      - comfyui-output:/app/output
+    profiles:
+      - ai
+
+  # Optional: Sequential thinking MCP server
+  sequential-thinking:
+    image: mcp/sequentialthinking
+    ports:
+      - "8082:8080"
+    profiles:
+      - mcp
+
+volumes:
+  blender-cache:
+  blender-config:
+  comfyui-models:
+  comfyui-output:

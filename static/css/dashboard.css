@@ -1,0 +1,60 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header {
+    background-color: #343a40;
+    color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.service-status {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.service-status.running {
+    color: #198754;
+}
+
+.service-status.stopped {
+    color: #dc3545;
+}
+
+.service-status .fas {
+    margin-right: 0.5rem;
+}
+
+.project-item {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    background-color: white;
+}
+
+.project-item:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-sm {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+}
+
+#blender-output {
+    font-family: 'Courier New', monospace;
+    min-height: 100px;
+    white-space: pre-wrap;
+}
+
+.spinner-border {
+    width: 1rem;
+    height: 1rem;
+}
