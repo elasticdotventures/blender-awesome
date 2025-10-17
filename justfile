@@ -95,16 +95,16 @@ test-mcp:
 # Build blender-mcp Docker image
 build-mcp-docker:
     @echo "🐳 Building blender-mcp Docker image..."
-    cd {{workspace}}/blender-mcp && docker build -t blender-mcp:latest .
+    docker build -t blender-mcp:latest blender-mcp/
     @echo "✅ Docker image built: blender-mcp:latest"
 
 # Build and tag for GHCR
 build-mcp-docker-ghcr version:
     @echo "🐳 Building blender-mcp for GHCR..."
-    cd {{workspace}}/blender-mcp && docker build \
+    docker build \
         -t ghcr.io/elasticdotventures/blender-mcp:{{version}} \
         -t ghcr.io/elasticdotventures/blender-mcp:latest \
-        .
+        blender-mcp/
     @echo "✅ Docker image built with tags: {{version}}, latest"
 
 # Push to GHCR
