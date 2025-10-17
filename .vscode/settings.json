@@ -18,5 +18,8 @@
       "path": "/home/dev/.venv/bin/python",
       "type": "pythonEnvironment"
     }
-  ]
+  ],
+  "chatgpt.openOnStartup": true,
+  "gitlens.ai.model": "",
+  "notebook.defaultFormatter": null
 }

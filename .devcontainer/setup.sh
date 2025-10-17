@@ -32,20 +32,21 @@ if [ ! -d ~/.config/blender/4.2/scripts/addons/phobos ]; then
     echo "   2. Extract to: ~/.config/blender/4.2/scripts/addons/phobos"
 fi
 
+# Install Blender MCP addon
+echo "📦 Installing Blender MCP addon..."
+mkdir -p ~/.config/blender/4.2/scripts/addons
+cp /workspace/blender-mcp/addon.py ~/.config/blender/4.2/scripts/addons/blender_mcp_addon.py
+
+# Install blender-mcp server via UV
+echo "📦 Installing blender-mcp MCP server..."
+cd /workspace/blender-mcp
+uv pip install -e .
+
 # Create MCP configuration for Claude Desktop
 mkdir -p ~/.config/claude-desktop
 cat > ~/.config/claude-desktop/claude_desktop_config.json << 'EOF'
 {
   "mcpServers": {
-    "sequentialthinking": {
-      "command": "docker",
-      "args": [
-        "run",
-        "--rm",
-        "-i",
-        "mcp/sequentialthinking"
-      ]
-    },
     "blender": {
       "command": "uvx",
       "args": ["blender-mcp"],

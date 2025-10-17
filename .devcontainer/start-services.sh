@@ -2,9 +2,9 @@
 
 echo "🚀 Starting Blender Awesome services..."
 
-# Start Blender in headless mode with MCP server
-echo "🎨 Starting Blender MCP server..."
-blender --background --python /workspace/scripts/start_blender_mcp.py &
+# Start Blender with MCP addon enabled
+echo "🎨 Starting Blender with MCP addon..."
+blender --background --python-expr "import bpy; bpy.ops.preferences.addon_enable(module='blender_mcp_addon')" &
 BLENDER_PID=$!
 
 # Wait a moment for Blender to start

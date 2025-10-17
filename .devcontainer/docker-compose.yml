@@ -6,7 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ../:/workspace:cached
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - blender-cache:/home/dev/.cache
       - blender-config:/home/dev/.config
@@ -25,7 +24,6 @@ services:
     user: dev
     stdin_open: true
     tty: true
-    privileged: true  # For Docker-in-Docker
     command: sleep infinity
 
   # Optional: ComfyUI service for AI generation
@@ -38,6 +36,21 @@ services:
       - comfyui-output:/app/output
     profiles:
       - ai
+
+  # Blender MCP Server (built from forked repo)
+  blender-mcp:
+    build:
+      context: ../blender-mcp
+      dockerfile: Dockerfile
+    environment:
+      - BLENDER_HOST=blender-dev
+      - BLENDER_PORT=9876
+    stdin_open: true
+    tty: true
+    depends_on:
+      - blender-dev
+    profiles:
+      - mcp
 
   # Optional: Sequential thinking MCP server
   sequential-thinking:
