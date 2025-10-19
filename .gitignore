@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Exports
+exports/*.stl
+exports/*.dae
+exports/*.urdf
+
+# Blender
+*.blend1
+*.blend2
+models/cache/
+
+# Git submodules (tracked separately)
+_b00t_/
+blender-mcp/
+phobos/
+
+# Temp files
+.cache/
+.tmp/
+tmp/

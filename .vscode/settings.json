@@ -1,0 +1,25 @@
+{
+  "python.defaultInterpreterPath": "/home/dev/.venv/bin/python",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/logs": true,
+    "**/exports/*.stl": true,
+    "**/exports/*.dae": true
+  },
+  "blender.addon.autoReload": true,
+  "blender.addon.sourceDirectory": "${workspaceFolder}/scripts",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "jupyter.kernels.filter": [
+    {
+      "path": "/home/dev/.venv/bin/python",
+      "type": "pythonEnvironment"
+    }
+  ],
+  "chatgpt.openOnStartup": true,
+  "gitlens.ai.model": "",
+  "notebook.defaultFormatter": null
+}

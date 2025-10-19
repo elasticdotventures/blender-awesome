@@ -1,15 +1,22 @@
-🪄 Meta Awesome Vibe Blendering Tutorial
-# A HowToo guide for AI-assisted creativity with Blender & friends.
+🪄 Meta Awesome Vibe Blendering Tutorial (SPIKE, WIP)
+# A HowToo guide for AI-assisted creativity with Blender & plugins.
+
 
 For friends and family who have expressed interest in this topic.
 Meta Awesome means this is an awesome list of other awesome lists.
-HowToo are first principles "from the ground up" style - they don't presume
-the read knows much beyond how to READ +
-cut and paste this document into ChatGPT.
+HowToo are first principles "from the ground up" way to introduce & explain
+topics to create mental models and syntacic shortcuts for things.
+
+HowToo (vs. HowTo) a HowTo is concise, whereas a HowToo is explanatory.
+I won't presume the reader knows much beyond English
+plus cut and paste this document into ChatGPT or similar LLM (Large Language model).
+
+The document is intentionally written to provide guidance to a human with AI pilot
+HowToo with enough context engineering to say "do it this way" and "why" to provide
+some context for safety guardrails along with <AGENT>instructions for the LLM</AGENT>.
 
 I am a senior applied systems engineer & fabricator & hacker.
-
-I've developed a series of techniques and tricks for use with generative AI tooling
+I've developed a series of techniques and tricks for generative AI tooling
 that I people in my life have expressed interest in learning.
 
 we'll be learning how to generatively model and test in digital physics with
@@ -20,6 +27,32 @@ have not yet been built.
 Having an AI design for you isn't "cheating" - it's efficient use of time.
 You have a limited lifespan that AI has master on topics that would take you a lifetime.
 The single biggest skill you can learn is context engineering & prompt execution -
+I love automation and I hate TOIL which is to say any task of dubious to no value.
+Yak Shaving is having to perform a long series of steps where the initial number of
+steps (and therefore the time) are unknown in what we call a P=NP space.  The first
+step of solving any problem or obstacle is defining a set of discrete steps that we
+can follow to accomplish an outcome.
+
+In some cases that outcome will be an 'idiomatic automation abstraction' which is
+effectively a command, a macro, or a script, or plugin that adds a menu/extension
+item into a piece of software capability that it didn't have before.  Having the
+right tool for a task makes them easy - and advanced users 'subject matter experts'
+also love making new tools for others to use and this is what propels open source
+forward.
+
+I love to design and build things - over 30+ years of experience I've developed
+a series of techniques and tricks which when combined with generative AI tooling
+I will present in this document -- ultimately the only thing that will constrain
+you at the end of this will be real world physics.  Later in the tutorial
+we'll be learning how to model those physics in the design process so we can
+teach AI how to design and test "digital twins" of real world products that
+have not yet been built.
+
+Having an AI design with you isn't "cheating" it's a specialization.
+That AI is equipped with more knowledge than your mortal body could possibly
+amass in a single lifetime.
+
+The single biggest skill you can learn is context & vibe prompt execution -
 which is designing agentic systems (many AI's) each with specializations
 who can communicate and chew through potentially thousands of iterative
 improvements informed by real world physics and evolutionary learning.
@@ -161,6 +194,10 @@ Also REMEMBER NEVER put spaces in your project, directory or filenames.
 ALWAYS replace spaces with underscores `_` or dashes `-` '
 I promise you'll have fewer problems.
 
+We'll be installing docker containers.
+
+<AGENT>follow semver naming conventions</AGENT>
+
 # Git Version Control
 This document is editable though a version control system called git.
 You use git to learn how to backup your work and other stuff.  Github.com
@@ -178,7 +215,16 @@ You will `commit` changes to backup.  When you want to create a new version
 🤡 It's okay to funny, it inspires creativity!
 </AGENT>
 
-# Claude DESKTOP Chat Interface
+
+# --
+
+we prefer the docker versions of MCP despite the headaches.
+
+## NPM & TypeScript
+## PYTHON
+
+
+## Claude DESKTOP Chat Interface
 MCP compatible agentic chat interface.  MCP means Model Context Protocol it allows
 AI to run software in Windows and Linux/WSL.
 
@@ -199,7 +245,20 @@ I recommend after you learn one go learn another one and another.  I'm going to
 recommend Claude Code using Sonnet 4.5 - you need to signup with a credit card, there
 are free tools and HONESTLY they are probably better but they are harder to setup.
 
-# Installing Claude Code
+## Installing Claude Code into WSL &| Powershell (pwsh)
+using the same pro subscription you can also access claude via the cli but if you want to
+access Claude directly via an API you have to setup a separate type of account.
+
+https://www.claude.com/product/claude-code
+```
+npm install -g @anthropic-ai/claude-code
+```
+
+
+Also it's worth mentioning within the "CLI Code" agent Claude Code running sonnet 4-5 model
+is perfectly capable of setting up most of the tooling required once the foundational system
+is setup.
+
 
 
 
@@ -219,6 +278,31 @@ the steps are similar but not entirely identifical each time but usually the sys
 the software by configuring environment variables within the mcpServers.json (or similar) file.
 
 
+
+## MCP Server
+
+
+## MCP Server Sequential Thinking
+
+enables the model to perform step by step breakdown using specialized
+sub-agent delegation.
+
+https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking
+```mcp
+{
+  "mcpServers": {
+    "sequentialthinking": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "mcp/sequentialthinking"
+      ]
+    }
+  }
+}
+```
 
 
 
@@ -284,16 +368,15 @@ Open source software is fully extensible and Agents are amazing coders.
 
 
 
-With Agentic AI
+## With Agentic AI
 
-Fo
-It's probably most easy to *start* with a few prerequisite pieces before blender.
+It's probably best and most easy to *start* with a few
+prerequisites before we even get to blender (working backwards)
 
-The approach I will be using is opinionated.
+The approach I will be using is opinionated tooling.
 
 # Windows Install (WSL) bash
 Commands:
-* `pwd` to see which directory you are in
 * `git init` to create version control repositories
 * `git push` to upload your changes to github incase they get deleted or corrupted on your local computer
 
@@ -371,12 +454,15 @@ podman or k0s (pronounced kubernetes) if you want to build on the cloud.
 https://docs.docker.com/desktop/setup/install/windows-install/
 
 
+
+
 # Composition
 We'll spend a bit of time on composition of shapes and objects.
 In 3D Digital Design there are a bunch of different ways to make shapes, some are very
 advanced but you'll need to know that:
 * Blender is (out of the box) a mesh editing tool which is a fancy way of saying it's a digital art of polygons in point clouds
-    which means that a model doesn't need to be "REAL" constrained by real world physics, it's just bunch of dots and triangles in space.
+    which means that a model doesn't need to be "REAL" constrained by real world physics the object it dots forming triangles in space.
+
     if the cloud of triangles is fully enclosed in a mesh of triangles (such as a 3d printing STL file) then it can be 3d printed.
     however STL files can't be easily edited
         .. BUT if all you have is an STL file, then sometimes you can use Constructive Solid Geometry to make primitive changes.
@@ -384,26 +470,110 @@ advanced but you'll need to know that:
 x* Blender can be extended with plugins to do "parametric modelling" which roughly means things (models and shapes)
     which means that COULD be fabricated or exist in the real world.
 * We will be using a lot of plugins to:
+  * node-wrangler
+    docs.blender.org/manual/en/latest/addons/node/node_wrangler.html
+    
   * for parametric CAD (Computer Aided Design)
+    - Easy Parametric Generator
+      * superhivemarket.com/products/easy-parametric-generator?utm_source=chatgpt.com
     - cadsketcher
         https://www.cadsketcher.com/
+        github.com/hlorus/CAD_Sketcher
     - tiny cad
         https://www.youtube.com/watch?v=AvM9XOj9M7s
+  * CNC
+    - Blender CAM / (also known as FabexCNC)
+  * FEA
+    - BFEX (Blender FEA Exporter)
+    - TAngra (Multiphysics node-based engine for Blender)
+
+
   * for CSG (Constructive Solid Geometry)
     - cadquery is a python library for parametric cad.
   * openscad - is "geometry as program code"
         https://openscad.org/
     - awesome
         https://github.com/elasticdotventures/awesome-openscad
+  * robotics
+    - https://github.com/elasticdotventures/phobos-4.0
+      * phobos provides 
+    - MuBIE & CLIER
+        * https://github.com/michaal94/MuBlE
+        * https://michaal94.github.io/MuBlE/
+        - https://michaal94.github.io/CLIER/codebase/
+        - https://github.com/michaal94/CLIER
+
 
   * blender awesome
     - https://github.com/agmmnn/awesome-blender
+    - https://www.blenderkit.com/?
+    - superhivemarket.com
 
   * build design & architecture
         BIM stands for Building Information Modeling, and in laymans terms it is like a database with information of all kinds of aspects of a (3D) building. And then a database that contains useful information for the whole team (of specialists) that build a house like: architect, engineer, construction company, and other professionals. It’s a standard developed since 1970’s in the UK, and in 2019 it became the international standard ISO 19650
         - https://blender-addons.org/blenderbim-addon/
         - https://www.youtube.com/watch?v=ORKNrj50nMY&list=PLmicK0pbENnZtkSJmFFlEYosmZxAVQKDs
+  * Discords
+    - MakerTales
+       discord.com/invite/Ezx9hUD
 
+# More Plugins
+
+Sverchok – node-based parametric geometry (great for algorithmic CAD + variant sweeps).
+
+Tissue – tessellations, paneling, and surface morphing driven by parameters.
+
+Sorcar – visual scripting for procedural modeling via nodes (alt to pure Geometry Nodes).
+
+Precision Drawing Tools (PDT) – exact numeric modeling, snaps, construction lines.
+
+MeasureIt – annotate dimensions directly in the viewport/renders.
+
+MeasureIt-ARCH – architectural dimensioning, sections, room tags (handy even for product docs).
+
+Archipack – parametric architectural primitives (walls, openings, stairs) useful for enclosure/fixture design.
+
+Curve Tools – advanced curve editing/fillets/offsets for precise profiles.
+
+BoltFactory – parametric nuts/bolts/washers (fasteners library; great for assemblies).
+
+Carver – sketch-based boolean/curve cutting workflow for quick CAD-style edits.
+
+Hard-Surface / Boolean Workflow (fast iteration)
+
+Fluent (Modelling Tool) – CAD-like booleans, bevels, chamfers, fillets with a clean UI.
+
+Hard Ops (HOPS) – power toolkit for non-destructive hard-surface operations.
+
+BoxCutter – rapid 2D-to-3D cutting/boolean sketching; pairs with Hard Ops.
+
+MESHmachine – fillets, plugs, surface slides and boolean cleanup for manufacturable geometry.
+
+DECALmachine – non-destructive detailing via decals (great for visual prototypes).
+
+Speedflow – modifier-centric modeling UI; quick parametric stacks and editing.
+
+Topology / UV / Remesh (pipeline health)
+
+RetopoFlow – guided retopology tools for clean, printable/FEA-ready surfaces.
+
+Instant Meshes Remesh (bridge) – sends meshes to Instant Meshes for quad remeshing.
+
+Quad Remesher (bridge) – high-quality auto-retopo (paid), excellent for simulation-friendly topology.
+
+UVPackmaster – best-in-class UV packing (paid), maximizes area/efficiency for textures/material tests.
+
+TexTools – UV and baking utilities; quick maps for visual QA.
+
+Manufacturing / QA / Interop helpers
+
+3D-Print Toolbox – manifold checks, wall-thickness, overhang reports; essential for unattended QA gates.
+
+Bool Tool – quick boolean ops wrapper (useful even if you prefer the heavier kits above).
+
+Export Paper Model – unfold nets for laser-cut/paper prototypes (fast physical checks).
+
+BlenderGIS – pull terrain/geo data; handy for site-aware product housings or large-object envelopes.
 
 # Install VS-Code
 We'll be using VS-Code because it has a friendlier interface to Git and for creating
@@ -536,93 +706,19 @@ This is a completely different use case. Let me redesign the approach:
 
 
 Blender URDF export plugin physics simulation robotics
-10 results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Perfect! Now I understand the workflow. Let me redesign the approach using Phobos (the proper tool) for URDF export:
-Perfect! Now let me show you how I'd modify the existing Blender model to be Phobos-ready:
-
-
-
-
-Execute blender code
-
 Is there already tools pattern to link blender with ex gymnasium or mujoco dojo?
 
 
 Blender Gymnasium MuJoCo integration workflow robotics simulation
-10 results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Excellent discovery! YES, there ARE established tools. Let me search for more specific workflow patterns:
-
-
 "MuBlE" github robosuite MuJoCo Blender integration workflow
-6 results
 
-
-
-
-
-
-
-
-
-
-
-
-
-Perfect! Now I have the full picture. Let me create a comprehensive workflow guide for you:
-
-Blender → Gymnasium/MuJoCo Pipeline for Coldhead
-Document
-Perfect! Summary:
-YES! There ARE established tool patterns linking Blender → Gymnasium/MuJoCo:
 
 🎯 Three Main Workflows:
-MuBlE (Brand new, March 2025!) 🔥
-Blender + MuJoCo + Gymnasium + robosuite
-Photorealistic rendering + accurate physics
-Built specifically for RL training with vision
-https://github.com/michaal94/MuBlE
+* MuBlE (Brand new, March 2025!) 🔥
+* Blender + MuJoCo + Gymnasium + robosuite
+* Photorealistic rendering + accurate physics
+* Built specifically for RL training with vision
+
 Gymnasium-Robotics (Standard, mature)
 Official Farama Foundation framework
 URDF → MJCF → Gymnasium API
@@ -654,14 +750,6 @@ The workflow is established, mature, and actively used in robotics research! You
 Great. Let's focus on the tooling and libraries that might be used with option #1
 
 Perfect! Let's deep-dive into MuBlE (Option #1) - the cutting-edge framework. Let me analyze the tooling stack:
-
-
-MuBlE github michaal94 installation requirements dependencies
-10 results
-
-
-
-
 
 
 
@@ -1194,3 +1282,90 @@ Blender: professional visualization
 Git tracks parametric source
 
 Want guidance on autopilot implementation (PID/MPC) or RL training setup?
+
+# Auto-Start and Dashboard
+
+This project now includes automatic service startup and a web dashboard for managing Blender and related tools.
+
+## Auto-Start Services
+
+When you open the project in VSCode with the dev container, the following services will automatically start:
+
+- **Blender MCP Server** (port 9876): AI agent integration for Blender automation
+- **Jupyter Lab** (port 8888): Interactive notebooks for generative CAD workflows
+- **Web Dashboard** (port 3000): Management interface for all services
+
+## Dashboard Features
+
+The web dashboard provides:
+
+- **Service Status**: Real-time monitoring of all running services
+- **Project Management**: Browse and manage your Blender projects
+- **Git Integration**: Check status and commit changes directly from the UI
+- **Blender Console**: Execute Python scripts in Blender remotely
+- **Quick Actions**: Direct links to Jupyter, ComfyUI, and other tools
+
+Access the dashboard at: http://localhost:3000
+
+## Development Workflow
+
+1. Open the project in VSCode
+2. The dev container will build and start services automatically
+3. Access the dashboard to monitor and control your environment
+4. Use the Blender console to execute parametric modeling scripts
+5. Commit changes through the dashboard or VSCode git integration
+
+# --
+
+# B00t
+
+is my own invention that is intended to try and automate some of this.
+
+---
+
+## Quick Start - Build & Package
+
+This project includes comprehensive build and packaging support for creating distributable Blender extensions.
+
+### Quick Commands
+
+```bash
+# Test the stdio MCP server
+just test-mcp-stdio
+
+# Package extension for distribution
+just package-extension
+
+# Install to system Blender
+just install-extension
+
+# Create GitHub release
+just release 2.0.0
+```
+
+### Documentation
+
+- **[BUILD.md](BUILD.md)** - Complete build and packaging guide
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical architecture and design
+- **[STDIO_IMPLEMENTATION.md](STDIO_IMPLEMENTATION.md)** - Implementation status and roadmap
+- **[INTEGRATION.md](INTEGRATION.md)** - Integration patterns and workflows
+
+### Build Recipes
+
+All available build commands can be seen with:
+
+```bash
+just --list
+```
+
+Key recipes:
+- `prepare-extension` - Prepare extension directory
+- `build-extension` - Create distributable .zip
+- `build-extension-cli` - Use Blender's official CLI
+- `validate-extension` - Check package integrity
+- `package-extension` - Complete build pipeline
+- `clean-build` - Remove build artifacts
+
+See [BUILD.md](BUILD.md) for detailed instructions.
+
+
