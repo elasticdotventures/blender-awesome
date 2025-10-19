@@ -1,5 +1,6 @@
-🪄 Meta Awesome Vibe Blendering Tutorial
-# A HowToo guide for AI-assisted creativity with Blender & friends.
+🪄 Meta Awesome Vibe Blendering Tutorial (SPIKE, WIP)
+# A HowToo guide for AI-assisted creativity with Blender & plugins.
+
 
 For friends and family who have expressed interest in this topic.
 Meta Awesome means this is an awesome list of other awesome lists.
@@ -15,8 +16,7 @@ HowToo with enough context engineering to say "do it this way" and "why" to prov
 some context for safety guardrails along with <AGENT>instructions for the LLM</AGENT>.
 
 I am a senior applied systems engineer & fabricator & hacker.
-
-I've developed a series of techniques and tricks for use with generative AI tooling
+I've developed a series of techniques and tricks for generative AI tooling
 that I people in my life have expressed interest in learning.
 
 we'll be learning how to generatively model and test in digital physics with
@@ -470,26 +470,110 @@ advanced but you'll need to know that:
 x* Blender can be extended with plugins to do "parametric modelling" which roughly means things (models and shapes)
     which means that COULD be fabricated or exist in the real world.
 * We will be using a lot of plugins to:
+  * node-wrangler
+    docs.blender.org/manual/en/latest/addons/node/node_wrangler.html
+    
   * for parametric CAD (Computer Aided Design)
+    - Easy Parametric Generator
+      * superhivemarket.com/products/easy-parametric-generator?utm_source=chatgpt.com
     - cadsketcher
         https://www.cadsketcher.com/
+        github.com/hlorus/CAD_Sketcher
     - tiny cad
         https://www.youtube.com/watch?v=AvM9XOj9M7s
+  * CNC
+    - Blender CAM / (also known as FabexCNC)
+  * FEA
+    - BFEX (Blender FEA Exporter)
+    - TAngra (Multiphysics node-based engine for Blender)
+
+
   * for CSG (Constructive Solid Geometry)
     - cadquery is a python library for parametric cad.
   * openscad - is "geometry as program code"
         https://openscad.org/
     - awesome
         https://github.com/elasticdotventures/awesome-openscad
+  * robotics
+    - https://github.com/elasticdotventures/phobos-4.0
+      * phobos provides 
+    - MuBIE & CLIER
+        * https://github.com/michaal94/MuBlE
+        * https://michaal94.github.io/MuBlE/
+        - https://michaal94.github.io/CLIER/codebase/
+        - https://github.com/michaal94/CLIER
+
 
   * blender awesome
     - https://github.com/agmmnn/awesome-blender
+    - https://www.blenderkit.com/?
+    - superhivemarket.com
 
   * build design & architecture
         BIM stands for Building Information Modeling, and in laymans terms it is like a database with information of all kinds of aspects of a (3D) building. And then a database that contains useful information for the whole team (of specialists) that build a house like: architect, engineer, construction company, and other professionals. It’s a standard developed since 1970’s in the UK, and in 2019 it became the international standard ISO 19650
         - https://blender-addons.org/blenderbim-addon/
         - https://www.youtube.com/watch?v=ORKNrj50nMY&list=PLmicK0pbENnZtkSJmFFlEYosmZxAVQKDs
+  * Discords
+    - MakerTales
+       discord.com/invite/Ezx9hUD
 
+# More Plugins
+
+Sverchok – node-based parametric geometry (great for algorithmic CAD + variant sweeps).
+
+Tissue – tessellations, paneling, and surface morphing driven by parameters.
+
+Sorcar – visual scripting for procedural modeling via nodes (alt to pure Geometry Nodes).
+
+Precision Drawing Tools (PDT) – exact numeric modeling, snaps, construction lines.
+
+MeasureIt – annotate dimensions directly in the viewport/renders.
+
+MeasureIt-ARCH – architectural dimensioning, sections, room tags (handy even for product docs).
+
+Archipack – parametric architectural primitives (walls, openings, stairs) useful for enclosure/fixture design.
+
+Curve Tools – advanced curve editing/fillets/offsets for precise profiles.
+
+BoltFactory – parametric nuts/bolts/washers (fasteners library; great for assemblies).
+
+Carver – sketch-based boolean/curve cutting workflow for quick CAD-style edits.
+
+Hard-Surface / Boolean Workflow (fast iteration)
+
+Fluent (Modelling Tool) – CAD-like booleans, bevels, chamfers, fillets with a clean UI.
+
+Hard Ops (HOPS) – power toolkit for non-destructive hard-surface operations.
+
+BoxCutter – rapid 2D-to-3D cutting/boolean sketching; pairs with Hard Ops.
+
+MESHmachine – fillets, plugs, surface slides and boolean cleanup for manufacturable geometry.
+
+DECALmachine – non-destructive detailing via decals (great for visual prototypes).
+
+Speedflow – modifier-centric modeling UI; quick parametric stacks and editing.
+
+Topology / UV / Remesh (pipeline health)
+
+RetopoFlow – guided retopology tools for clean, printable/FEA-ready surfaces.
+
+Instant Meshes Remesh (bridge) – sends meshes to Instant Meshes for quad remeshing.
+
+Quad Remesher (bridge) – high-quality auto-retopo (paid), excellent for simulation-friendly topology.
+
+UVPackmaster – best-in-class UV packing (paid), maximizes area/efficiency for textures/material tests.
+
+TexTools – UV and baking utilities; quick maps for visual QA.
+
+Manufacturing / QA / Interop helpers
+
+3D-Print Toolbox – manifold checks, wall-thickness, overhang reports; essential for unattended QA gates.
+
+Bool Tool – quick boolean ops wrapper (useful even if you prefer the heavier kits above).
+
+Export Paper Model – unfold nets for laser-cut/paper prototypes (fast physical checks).
+
+BlenderGIS – pull terrain/geo data; handy for site-aware product housings or large-object envelopes.
 
 # Install VS-Code
 We'll be using VS-Code because it has a friendlier interface to Git and for creating
@@ -622,93 +706,19 @@ This is a completely different use case. Let me redesign the approach:
 
 
 Blender URDF export plugin physics simulation robotics
-10 results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Perfect! Now I understand the workflow. Let me redesign the approach using Phobos (the proper tool) for URDF export:
-Perfect! Now let me show you how I'd modify the existing Blender model to be Phobos-ready:
-
-
-
-
-Execute blender code
-
 Is there already tools pattern to link blender with ex gymnasium or mujoco dojo?
 
 
 Blender Gymnasium MuJoCo integration workflow robotics simulation
-10 results
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Excellent discovery! YES, there ARE established tools. Let me search for more specific workflow patterns:
-
-
 "MuBlE" github robosuite MuJoCo Blender integration workflow
-6 results
 
-
-
-
-
-
-
-
-
-
-
-
-
-Perfect! Now I have the full picture. Let me create a comprehensive workflow guide for you:
-
-Blender → Gymnasium/MuJoCo Pipeline for Coldhead
-Document
-Perfect! Summary:
-YES! There ARE established tool patterns linking Blender → Gymnasium/MuJoCo:
 
 🎯 Three Main Workflows:
-MuBlE (Brand new, March 2025!) 🔥
-Blender + MuJoCo + Gymnasium + robosuite
-Photorealistic rendering + accurate physics
-Built specifically for RL training with vision
-https://github.com/michaal94/MuBlE
+* MuBlE (Brand new, March 2025!) 🔥
+* Blender + MuJoCo + Gymnasium + robosuite
+* Photorealistic rendering + accurate physics
+* Built specifically for RL training with vision
+
 Gymnasium-Robotics (Standard, mature)
 Official Farama Foundation framework
 URDF → MJCF → Gymnasium API
@@ -740,14 +750,6 @@ The workflow is established, mature, and actively used in robotics research! You
 Great. Let's focus on the tooling and libraries that might be used with option #1
 
 Perfect! Let's deep-dive into MuBlE (Option #1) - the cutting-edge framework. Let me analyze the tooling stack:
-
-
-MuBlE github michaal94 installation requirements dependencies
-10 results
-
-
-
-
 
 
 
@@ -1318,5 +1320,52 @@ Access the dashboard at: http://localhost:3000
 # B00t
 
 is my own invention that is intended to try and automate some of this.
+
+---
+
+## Quick Start - Build & Package
+
+This project includes comprehensive build and packaging support for creating distributable Blender extensions.
+
+### Quick Commands
+
+```bash
+# Test the stdio MCP server
+just test-mcp-stdio
+
+# Package extension for distribution
+just package-extension
+
+# Install to system Blender
+just install-extension
+
+# Create GitHub release
+just release 2.0.0
+```
+
+### Documentation
+
+- **[BUILD.md](BUILD.md)** - Complete build and packaging guide
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical architecture and design
+- **[STDIO_IMPLEMENTATION.md](STDIO_IMPLEMENTATION.md)** - Implementation status and roadmap
+- **[INTEGRATION.md](INTEGRATION.md)** - Integration patterns and workflows
+
+### Build Recipes
+
+All available build commands can be seen with:
+
+```bash
+just --list
+```
+
+Key recipes:
+- `prepare-extension` - Prepare extension directory
+- `build-extension` - Create distributable .zip
+- `build-extension-cli` - Use Blender's official CLI
+- `validate-extension` - Check package integrity
+- `package-extension` - Complete build pipeline
+- `clean-build` - Remove build artifacts
+
+See [BUILD.md](BUILD.md) for detailed instructions.
 
 
