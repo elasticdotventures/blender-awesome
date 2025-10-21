@@ -40,6 +40,8 @@ exports/*.urdf
 *.blend1
 *.blend2
 models/cache/
+.blender.env
+.blender.env.wsl
 
 # Git submodules (tracked separately)
 _b00t_/
@@ -50,3 +52,8 @@ phobos/
 .cache/
 .tmp/
 tmp/
+
+# Build artifacts
+build/
+dist/
+*.zip
