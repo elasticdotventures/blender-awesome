@@ -65,6 +65,11 @@ I won't link tutorials Jamie, Abhay, Warren, Ethan, Sara, or Ranger
 because you just need to pasting this URL into a CHAT interface and those
 links will get bit rot and I don't want to maintain.
 
+## Quick Install: DeepSeek-OCR Weights
+
+1. From the project root run `just install`. The recipe downloads the `deepseek-ai/DeepSeek-OCR` snapshot into `DeepSeek-OCR/models/deepseek-ai__DeepSeek-OCR`.
+2. Export `VLLM_MODEL_DIR=DeepSeek-OCR/models/deepseek-ai__DeepSeek-OCR` (or point the compose file/env var to that directory) before launching the Blender MCP + vLLM stack.
+
 A great trick is to search "app-name v5 2025 best tutorial windows" for
 whatever app or version.  You can also search similarly for python libraries,
 or other awesome lists.
