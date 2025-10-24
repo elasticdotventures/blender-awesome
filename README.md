@@ -1,6 +1,10 @@
 🪄 Meta Awesome Vibe Blendering Tutorial (SPIKE, WIP)
 # A HowToo guide for AI-assisted creativity with Blender & plugins.
 
+> **Project status**
+>
+> This repository currently tracks a feature-forward fork of [ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp) (`main`). We’re iterating quickly on vision tooling, Docker workflows, and LangChain integrations here. Once the extended scope stabilises, the project will be renamed to reflect its broader focus. Until then, expect the documentation and manifests to change frequently as the fork evolves.
+
 
 For friends and family who have expressed interest in this topic.
 Meta Awesome means this is an awesome list of other awesome lists.
