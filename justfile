@@ -21,9 +21,36 @@ install:
             --local-dir-use-symlinks False; \
     fi; \
     python3 - "${target_dir}" -c 'import json, sys; from pathlib import Path; target = Path(sys.argv[1]); cfg_path = target / "config.json";\nif not cfg_path.exists():\n    print(f"❌ Missing config.json at {cfg_path}", file=sys.stderr); sys.exit(1)\ncfg = json.loads(cfg_path.read_text()); updated = False\nif cfg.get("model_type") != "deepseek_vl2":\n    cfg["model_type"] = "deepseek_vl2"; updated = True\ncfg.setdefault("architectures", ["DeepseekVLV2ForCausalLM"])\ndesired_auto_map = {\n    \"AutoConfig\": \"vllm.transformers_utils.configs.deepseek_vl2.DeepseekVLV2Config\",\n    \"AutoModel\": \"vllm.transformers_utils.configs.deepseek_vl2.DeepseekVLV2ForCausalLM\",\n    \"AutoModelForCausalLM\": \"vllm.transformers_utils.configs.deepseek_vl2.DeepseekVLV2ForCausalLM\",\n}\nauto_map = cfg.get(\"auto_map\", {})\nif auto_map != desired_auto_map:\n    auto_map.update(desired_auto_map)\n    cfg[\"auto_map\"] = auto_map\n    updated = True\nif updated:\n    cfg_path.write_text(json.dumps(cfg, indent=2))\n    print(f\"🛠️  Patched config metadata at {cfg_path}\")\nelse:\n    print(f\"✅ Config metadata already patched at {cfg_path}\")\n'
+    bash {{workspace}}/blender-mcp/patch_deepseek_ocr.sh "{{workspace}}/DeepSeek-OCR/models/deepseek-ai__DeepSeek-OCR"
     echo ""
     echo "Next steps:"
     echo "  • export VLLM_MODEL_DIR=${target_dir}"
+
+hf-download model dest="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    export PATH="$HOME/.local/uv-tools/bin:$HOME/.local/share/uv/tools/bin:$PATH"
+    MODEL="{{model}}"
+    DEST="{{dest}}"
+    if [ -z "$DEST" ]; then
+        SAFE_NAME="${MODEL//\//__}"
+        DEST="$HOME/.models/$SAFE_NAME"
+    fi
+    mkdir -p "$DEST"
+    echo "📥 Downloading $MODEL to $DEST"
+    huggingface-cli download "$MODEL" \
+        --local-dir "$DEST" \
+        --local-dir-use-symlinks False
+
+vllm-up:
+    direnv exec {{workspace}}/blender-mcp docker compose up -d vllm
+
+vllm-logs:
+    direnv exec {{workspace}}/blender-mcp docker compose logs -f vllm
+
+# Ensure git submodules (e.g. blender-mcp) are initialized
+update-submodules:
+    git submodule update --init --recursive
 
 # Detect Blender (uses scripts/detect_blender.sh)
 [private]
@@ -199,7 +226,7 @@ prepare-extension:
     bl_info = {
         "name": "Blender MCP",
         "author": "Elastic Dot Ventures",
-        "version": (2, 0, 0),
+        "version": ({{extension_version_tuple}}),
         "blender": (4, 2, 0),
         "location": "View3D > Sidebar > BlenderMCP",
         "description": "Model Context Protocol integration for Claude AI and LLM agents",
@@ -315,7 +342,7 @@ build-extension: prepare-extension
 
     # Create zip file
     cd "$BUILD_DIR"
-    ZIP_FILE="$OUTPUT_DIR/blender-mcp-extension-v2.0.0.zip"
+    ZIP_FILE="$OUTPUT_DIR/blender-mcp-extension-v{{extension_version}}.zip"
     rm -f "$ZIP_FILE"
 
     if command -v zip >/dev/null 2>&1; then
@@ -352,7 +379,7 @@ validate-extension:
     set -euo pipefail
     echo "🔍 Validating extension package..."
 
-    ZIP_FILE="{{workspace}}/dist/blender-mcp-extension-v2.0.0.zip"
+    ZIP_FILE="{{workspace}}/dist/blender-mcp-extension-v{{extension_version}}.zip"
 
     if [ ! -f "$ZIP_FILE" ]; then
         echo "❌ Extension package not found. Run: just build-extension"
@@ -383,7 +410,7 @@ install-extension: build-extension
     set -euo pipefail
     echo "📥 Installing extension to Blender..."
 
-    ZIP_FILE="{{workspace}}/dist/blender-mcp-extension-v2.0.0.zip"
+    ZIP_FILE="{{workspace}}/dist/blender-mcp-extension-v{{extension_version}}.zip"
 
     # Check if Blender 4.2+ supports extension install
     if "{{blender}}" --help 2>&1 | grep -q "extension install"; then
@@ -415,7 +442,7 @@ package-extension: prepare-extension build-extension validate-extension
     @echo ""
     @echo "🎉 Extension packaging complete!"
     @echo ""
-    @echo "📦 Package: {{workspace}}/dist/blender-mcp-extension-v2.0.0.zip"
+    @echo "📦 Package: {{workspace}}/dist/blender-mcp-extension-v{{extension_version}}.zip"
     @echo ""
     @echo "Next steps:"
     @echo "  1. Test install: just install-extension"
@@ -627,3 +654,19 @@ check-deps:
     echo "Workspace: {{workspace}}"
 docs-download:
     wget --mirror --convert-links --adjust-extension --page-requisites --no-parent https://docs.blender.org/api/current
+extension_version := `python3 - <<'PY'
+import tomllib
+from pathlib import Path
+data = tomllib.loads(Path("blender-mcp/pyproject.toml").read_text())
+print(data["project"]["version"])
+PY`
+
+extension_version_tuple := `python3 - <<'PY'
+import tomllib
+from pathlib import Path
+data = tomllib.loads(Path("blender-mcp/pyproject.toml").read_text())
+parts = data["project"]["version"].split(".")
+parts = (parts + ["0", "0"])[:3]
+nums = [str(int(p)) for p in parts]
+print(", ".join(nums))
+PY`
